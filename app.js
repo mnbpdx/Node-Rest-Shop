@@ -12,12 +12,17 @@ mongoose.connect(
   "mongodb+srv://mbeebepdx:" +
     process.env.MONGO_ATLAS_PW +
     "@node-rest-shop.caxv7.mongodb.net/node-rest-shop?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  }
 );
 mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -38,7 +43,6 @@ app.use((req, res, next) => {
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/user", userRoutes);
-
 
 // Handles requests that don't correspond to routes
 app.use((req, res, next) => {
