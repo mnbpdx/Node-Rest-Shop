@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const productRoutes = require("./api/routes/products");
 const orderRoutes = require("./api/routes/orders");
+const userRoutes = require("./api/routes/user");
 
 mongoose.connect(
   "mongodb+srv://mbeebepdx:" +
@@ -36,6 +37,8 @@ app.use((req, res, next) => {
 // Routes to handle requests
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
+app.use("/user", userRoutes);
+
 
 // Handles requests that don't correspond to routes
 app.use((req, res, next) => {
